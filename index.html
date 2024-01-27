@@ -5,8 +5,62 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hockey Sorting Hat</title>
   <link rel="stylesheet" href="main.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 <body>
+
+<!-- header and footer --introduction -->
+  <div class="card">
+    <div class="card-header">
+      <h1>Welcome to the Rookie Hockey Player Sorting Hat!</h1>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Which of the four teams will the legendary Sorting Hat select for the newbies?</h5>
+      <p class="card-text">Who will end up on the bench this year? Stay tuned to find out!</p>
+    </div>
+  </div>
+  
+  <!-- new player form -->
+  <form>
+    <div class="mb-3">
+      <label for="player name" class="form-label">Player Name</label>
+      <input type="text" class="form-control" id="playerName">
+    </div>
+    <button type="submit" class="btn btn-primary">May the Odds be ever in Your Favor!</button>
+  </form>
+
+<!-- filter buttons -->
+  <div class="btnGroup">
+    <a href="#" id="wings-btn" class="btn btn-primary">Red Wings</a>
+    <a href="#" id="pred-btn" class="btn btn-primary">Predators</a>
+    <a href="#" id="oil-btn" class="btn btn-primary">Oilers</a>
+    <a href="#" id="aves-btn" class="btn btn-primary">Avalanche</a>
+    <a href="#" id="all-btn" class="btn btn-primary">All</a>
+</div>
+
+<!-- Player cards -->
+  <div class="card" style="width: 18rem;">
+    <!-- change img src to color somehow? -->
+    <!-- <img src="..." class="card-img-top"> -->
+    <div class="card-body">
+      <h5 class="card-title">Player Name</h5>
+      <a href="#" class="btn btn-primary">Bench</a>
+    </div>
+  </div>
+
+  <!-- benched cards -->
+  <div class="card" style="width: 18rem;">
+    <img src="Assets/bench.jpeg" class="card-img-top">
+    <div class="card-body">
+      <h5 class="card-title">You didn't make the cut.</h5>
+      <p class="card-text">This space will include a quirky message with player who was benched's name</p>
+    </div>
+  </div>
+
+<!-- div targeting js array of players -->
+  <div id="players"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
   <script src="main.js"></script>
 </body>
 </html>
