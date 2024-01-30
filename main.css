@@ -1,3 +1,41 @@
-body {
-  background-color: lightblue;
+#wings-btn {
+  background-color: red;
+  color: white;
+  border: black solid 1px;
+}
+
+#pred-btn {
+  background-color: goldenrod;
+  color: black;
+  border: black solid 1px;
+}
+
+#oil-btn {
+  background-color: darkblue;
+  color: white;
+  border: black solid 1px;
+}
+
+#aves-btn {
+  background-color: #800020;
+  color: white;
+  border: black solid 1px;
+}
+
+#all-btn {
+  background-color: black;
+  color: white;
+  border: black solid 1px;
+}
+
+#showSecond {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+}
+
+.benched {
+  margin: 15px;
+  height: 15%;
+  width: 20%;
 }
