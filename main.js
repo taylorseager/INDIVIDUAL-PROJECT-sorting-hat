@@ -70,11 +70,17 @@ const players = [
 
 
 // for randomizer?
-const teamSort = ["Red Wings", "Avalanche", "Oilers", "Predators"]
+const teamSort = ["Red Wings", "Avalanche", "Oilers", "Predators"];
+
+const renderToDom = (divId, htmlToRender) => {
+  const selectedDiv = document.querySelector(divId);
+  selectedDiv.innerHTML = htmlToRender;
+};
 
 const cardsOnDom = (players) => {
   let domString = "";
-  for (const player of players) {
+  players.map(player => {
+    // += appends data to the domString
     domString += `<div class="card" style="width: 18rem;">
     <div class="card-body">
     <h5 class="card-title playerName">${player.name}</h5>
@@ -82,65 +88,36 @@ const cardsOnDom = (players) => {
       <button class="submit" id="bench--${player.id}">Bench</button>
     </div>
   </div>`;
-  }
-  const renderToDom = (divId, htmlToRender) => {
-    const selectedDiv = document.querySelector(divId);
-    selectedDiv.innerHTML = htmlToRender;
-  };
+  })
 
   renderToDom("#players", domString);
 };
 
-cardsOnDom(players);
-
-// let showFirst = 
-
 
 const sort = document.querySelector("#sort-btn");
+const form = document.querySelector("form")
 const showAll = document.querySelector("#all-btn");
 const showRedWings = document.querySelector("#wings-btn");
 const showPredators = document.querySelector("#pred-btn");
 const showOilers = document.querySelector("#oil-btn");
 const showAvalanche = document.querySelector("#aves-btn");
 
-sort.addEventListener('click', showFirst);
-sort.addEventListener('submit', showSecond);
 
+const filterButtons = () => {
+ domString = `<a href="#" id="wings-btn" class="btn btn-primary">Red Wings</a>
+  <a href="#" id="pred-btn" class="btn btn-primary">Predators</a>
+  <a href="#" id="oil-btn" class="btn btn-primary">Oilers</a>
+  <a href="#" id="aves-btn" class="btn btn-primary">Avalanche</a>
+  <a href="#" id="all-btn" class="btn btn-primary">All</a>`
+renderToDom("#btnGroup", domString)
+}
 
-showAll.addEventListener('click', () => {
-  cardsOnDom(players);
-});
-
-showRedWings.addEventListener('click', (e) => {
-// targets the button in html to connect the filter
-  if (e.target.id.includes("wings-btn")) {
-  const filterWings = players.filter((player) => player.team === "Red Wings");
-  cardsOnDom(filterWings);
-  }
-});
-
-showPredators.addEventListener('click', (e) => {
-    if (e.target.id.includes("pred-btn")) {
-    const filterPreds = players.filter((player) => player.team === "Predators")
-    cardsOnDom(filterPreds);
-    }
-});
-
-showOilers.addEventListener('click', (e) => {
-    if (e.target.id.includes("oil-btn")) {
-    const filterOilers = players.filter((player) => player.team === "Oilers")
-    cardsOnDom(filterOilers);
-    }
-});
-
-showAvalanche.addEventListener('click', (e) => {
-    if (e.target.id.includes("aves-btn")) {
-    const filterAvalanche = players.filter((player) => player.team === "Avalanche")
-    cardsOnDom(filterAvalanche);
-    }
-});
-
-const form = document.querySelector("form");
+const playerForm = () => {
+  domString = `<label for="name" class="form-label">Player Name</label>
+  <input type="text" class="form-control" id="playerName" required>
+<button id="sort-btn" type="submit" class="sort-btn btn-primary">May the Odds be ever in Your Favor!</button>`
+renderToDom("#playerForm", domString)
+}
 
 const newPlayer = (e) => {
   e.preventDefault()
@@ -148,45 +125,68 @@ const newPlayer = (e) => {
   const newPlayer = {
     id: players.length +1,
     name: document.querySelector("#playerName").value,
-  }
+    // uses the teamSort arry to generate a random number  * length of the array to randomly select and index, the Math.floor rounds to a whole number, corresponding to a value within the array
+    team: teamSort[Math.floor(Math.random() * teamSort.length)]
+  };
 
   players.push(newPlayer);
   cardsOnDom(players);
   form.reset();
 }
 
-form.addEventListener('submit', newPlayer);
-
-// need if else statement to make innerHTML work?
-error.innerHTML = "Enter player name to continue" 
-
-
-
-// randomizer
-let randomTeam = teamSort
-  .map(value => ({value, sort: Math.random()}))
-  .sort((a, b) => a.sort - b.sort)
-  .map(({value}) => value)
-console.log(randomTeam);
+sort.addEventListener('click', playerForm);
+form.addEventListener('submit', (e) => {
+  newPlayer(e);
+  filterButtons()});
 
 
+showAll.addEventListener('click', () => {
+  console.log('kittens')
+  cardsOnDom(players);
+});
 
-
-const benchPlayer = document.querySelector("#players");
-
-benchPlayer.addEventListener('click', (e) => {
-  if (e.target.id.includes("bench")) {
-    const [, id] = e.target.id.split("--");
-    const index = players.findIndex((player) => player.id === Number(id));
-    players.splice(index, 1);
-    cardsOnDom(players);
+showRedWings.addEventListener('click', (e) => {
+// targets the button in html to connect the filter
+  console.log("cat")
+  if (e.target.id.includes("wings-btn")) {
+  const filterWings = players.filter((player) => player.team === "Red Wings");
+  cardsOnDom(filterWings);
   }
 });
 
+showPredators.addEventListener('click', (e) => {
+  console.log("dog")
+    if (e.target.id.includes("pred-btn")) {
+    const filterPreds = players.filter((player) => player.team === "Predators")
+    cardsOnDom(filterPreds);
+    }
+});
 
+showOilers.addEventListener('click', (e) => {
+  console.log("hockey")
+    if (e.target.id.includes("oil-btn")) {
+    const filterOilers = players.filter((player) => player.team === "Oilers")
+    cardsOnDom(filterOilers);
+    }
+});
 
-const startApp = () => {
-  cardsOnDom(players);
-};
+showAvalanche.addEventListener('click', (e) => {
+  console.log("puck")
+    if (e.target.id.includes("aves-btn")) {
+    const filterAvalanche = players.filter((player) => player.team === "Avalanche")
+    cardsOnDom(filterAvalanche);
+    }
+});
 
-startApp();
+const benchPlayer = () => {
+  domString = `class="card benched" style="width: 18rem;"> <img src="Assets/bench.jpeg" class="card-img-top"> <class="card-body"><h5 class="card-title">You didn't make the cut.</h5><p class="card-text">This space will include a quirky message with player who was benched's name</p>`
+  renderToDom("#benchedCards", domString)
+}
+
+// cardsOnDom(players);
+
+// const startApp = () => {
+//   cardsOnDom(players);
+// };
+
+// startApp();
