@@ -11,13 +11,13 @@
 }
 
 #oil-btn {
-  background-color: darkblue;
-  color: white;
+  background-color: lightblue;
+  color: black;
   border: black solid 1px;
 }
 
 #aves-btn {
-  background-color: #800020;
+  background-color: lightsalmon;
   color: white;
   border: black solid 1px;
 }
@@ -28,16 +28,21 @@
   border: black solid 1px;
 }
 
-/* #benchBtn {
-  margin: 15px;
-  height: 15%;
-  width: 20%;
-  border: black solid 1px;
-  background-color: black;
-  color: white;
-} */
 
 .sort-btn {
-  background-color: lightsalmon;
+  background-color: rgb(67, 229, 156);
   border-radius: 17px;
+}
+
+#app {
+  display: flex;
+  padding: 10px;
+}
+
+#benchedCards {
+  padding: 5px;
+}
+
+#players {
+  margin: 2px;
 }

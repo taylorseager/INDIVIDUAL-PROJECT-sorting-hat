@@ -61,12 +61,9 @@ const players = [
   },
 ];
 
-
-
 const teamSort = ["Red Wings", "Avalanche", "Oilers", "Predators"];
 
 const renderToDom = (divId, htmlToRender) => {
-  console.log(divId)
   const selectedDiv = document.querySelector(divId);
   selectedDiv.innerHTML = htmlToRender;
 };
@@ -75,7 +72,17 @@ const cardsOnDom = (players) => {
   let domString = "";
   players.map((player) => {
     // += appends data to the domString
-    domString += `<div class="card" style="width: 18rem;">
+    domString += `<div class="card" style="width: 18rem; background-color: ${
+      player.team === "Red Wings"
+        ? "red"
+        : player.team === "Oilers"
+        ? "lightblue"
+        : player.team === "Avalanche"
+        ? "lightsalmon"
+        : player.team === "Predators"
+        ? "goldenrod"
+        : " "
+    }">
     <div class="card-body">
     <h5 class="card-title playerName">${player.name}</h5>
       <p class="card-text team">${player.team}</p>
@@ -85,8 +92,6 @@ const cardsOnDom = (players) => {
   });
   renderToDom("#players", domString);
 };
-
-
 
 const sort = document.querySelector("#sort-btn");
 const form = document.querySelector("form");
@@ -129,9 +134,6 @@ form.addEventListener("submit", (e) => {
   filterButtons();
 });
 
-
-
-
 btnGroup.addEventListener("click", (e) => {
   if (e.target.id.includes("wings-btn")) {
     const filterWings = players.filter((player) => player.team === "Red Wings");
@@ -147,7 +149,8 @@ btnGroup.addEventListener("click", (e) => {
   }
   if (e.target.id.includes("aves-btn")) {
     const filterAvalanche = players.filter(
-      (player) => player.team === "Avalanche");
+      (player) => player.team === "Avalanche"
+    );
     cardsOnDom(filterAvalanche);
   }
   if (e.target.id.includes("all-btn")) {
@@ -155,29 +158,25 @@ btnGroup.addEventListener("click", (e) => {
   }
 });
 
-const benchPlayers = []
+const benchPlayers = [];
 
 // benched function
-const benchBtn = document.querySelector("#players")
-
-
+const benchBtn = document.querySelector("#players");
 
 function renderToBenchedDom() {
   let domString = "";
   benchPlayers.map((benchPlayer) => {
-    domString += `<div class="card benched" style="width: 18rem;"> <img src="Assets/bench.jpeg" class="card-img-top"> <class="card-body"><h5 class="card-title">Benched Players.</h5><p id="benchedPlayer">Sorry ${benchPlayer.name}, you didn't make the cut. Try again next year.</p></div>`
-  })
-  // renderToBenchedDom("#benchedCards", domString)
-};
-
-
+    domString += `<div class="card benched" style="width: 18rem; background-color: black; color: white"> <img src="Assets/bench.jpeg" class="card-img-top"> <class="card-body"><h5 class="card-title">Benched Players</h5><p id="benchedPlayer">Sorry ${benchPlayer.name}, you didn't make the cut. Try again next year.</p></div>`;
+  });
+  renderToDom("#benchedCards", domString)
+}
 
 benchBtn.addEventListener("click", (e) => {
   if (e.target.id.includes("bench")) {
     const [, id] = e.target.id.split("--");
     const index = players.findIndex((player) => player.id === Number(id));
-    benchPlayers.push(players.splice(index, 1));
+    benchPlayers.push(players.splice(index, 1)[0]);
   }
-  renderToDom("#players", cardsOnDom(players));
+  cardsOnDom(players);
   renderToBenchedDom();
 });
