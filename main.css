@@ -28,14 +28,16 @@
   border: black solid 1px;
 }
 
-#showSecond {
-  display: flex;
-  flex-wrap: wrap;
-  align-content: center;
-}
-
-.benched {
+/* #benchBtn {
   margin: 15px;
   height: 15%;
   width: 20%;
+  border: black solid 1px;
+  background-color: black;
+  color: white;
+} */
+
+.sort-btn {
+  background-color: lightsalmon;
+  border-radius: 17px;
 }
