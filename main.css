@@ -32,17 +32,52 @@
 .sort-btn {
   background-color: rgb(67, 229, 156);
   border-radius: 17px;
+  padding: 5px;
+}
+
+#btnGroup {
+  padding: 5px;
 }
 
 #app {
   display: flex;
-  padding: 10px;
 }
 
 #benchedCards {
+  display: flex;
+  flex-flow: wrap;
+  gap: 10px;
   padding: 5px;
+  height: 10%;
+  width: 50%;
+  position: absolute;
+  left: 50%;
 }
 
 #players {
-  margin: 2px;
+  display: flex;
+  flex-flow: column wrap;
+  gap: 10px;
+  padding: 4px;
+  height: 10%;
+  width: 30%
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+}
+
+.protest-guerrilla-regular {
+  font-family: "Protest Guerrilla", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+h1 {
+  font-family: "Protest Guerrilla", sans-serif;
+}
+
+#playerForm {
+  margin: 5px;
 }
